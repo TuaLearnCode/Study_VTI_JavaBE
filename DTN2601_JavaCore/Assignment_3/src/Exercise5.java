@@ -48,7 +48,18 @@ public class Exercise5 {
             new Department(4, "Boss of director"),
             new Department(5, "waiting room")
         };
-        Arrays.sort(departments, (a, b) -> a.departmentName.compareTo(b.departmentName));
+
+        // Sort departments theo lastWords (chữ cái đầu đã thành thường)
+        Arrays.sort(departments, (a, b) -> {
+            String lastA = a.departmentName.trim().split("\\s+")[a.departmentName.trim().split("\\s+").length - 1];
+            String lastB = b.departmentName.trim().split("\\s+")[b.departmentName.trim().split("\\s+").length - 1];
+            lastA = Character.toLowerCase(lastA.charAt(0)) + lastA.substring(1);
+            lastB = Character.toLowerCase(lastB.charAt(0)) + lastB.substring(1);
+            return lastA.compareTo(lastB);
+        });
+
+        // In ra tên gốc theo thứ tự đã sort
+        System.out.println("Sau khi sort theo tu cuoi:");
         for (Department d : departments) {
             System.out.println(d.departmentName);
         }
